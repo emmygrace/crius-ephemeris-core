@@ -1,0 +1,113 @@
+Metadata-Version: 2.4
+Name: crius-ephemeris-core
+Version: 0.1.0
+Summary: Core ephemeris types and interfaces for Crius - pure abstractions with no external dependencies
+Author: Emmy Grace
+License: MIT
+Keywords: ephemeris,astrology,astronomy,celestial
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Typing :: Typed
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
+Requires-Dist: mypy>=1.5.0; extra == "dev"
+Requires-Dist: black>=23.0.0; extra == "dev"
+Requires-Dist: ruff>=0.1.0; extra == "dev"
+Dynamic: license-file
+
+# crius-ephemeris-core
+
+**Crius** - Core ephemeris types and interfaces for astrological calculations.
+
+Named after [Crius](https://en.wikipedia.org/wiki/Crius), the Titan of constellations and measuring the year in Greek mythology.
+
+## Overview
+
+This package provides pure abstractions for ephemeris calculations:
+- Type definitions for ephemeris data structures
+- Protocol/interface definitions for ephemeris adapters
+- Core service interfaces (without database dependencies)
+
+**No external dependencies** - This package is MIT licensed and contains only pure Python types and interfaces.
+
+## Installation
+
+```bash
+pip install crius-ephemeris-core
+```
+
+Or for development:
+
+```bash
+pip install -e packages/crius-ephemeris-core
+```
+
+## Usage
+
+### Types
+
+```python
+from crius_ephemeris_core import (
+    EphemerisSettings,
+    GeoLocation,
+    PlanetPosition,
+    HousePositions,
+    LayerPositions,
+    LayerContext,
+)
+
+# Define ephemeris settings
+settings: EphemerisSettings = {
+    "zodiac_type": "tropical",
+    "ayanamsa": None,
+    "house_system": "placidus",
+    "include_objects": ["sun", "moon", "mercury"],
+}
+
+# Define location
+location: GeoLocation = {
+    "lat": 40.7128,
+    "lon": -74.0060,
+}
+```
+
+### Adapter Protocol
+
+```python
+from crius_ephemeris_core import EphemerisAdapter, LayerPositions
+from datetime import datetime
+
+# Use the protocol to define your own adapter
+class MyEphemerisAdapter:
+    def calc_positions(
+        self,
+        dt_utc: datetime,
+        location: Optional[GeoLocation],
+        settings: EphemerisSettings,
+    ) -> LayerPositions:
+        # Your implementation
+        ...
+```
+
+## Package Structure
+
+- `crius_ephemeris_core/types.py` - All type definitions
+- `crius_ephemeris_core/protocols.py` - Adapter protocol definitions
+- `crius_ephemeris_core/service.py` - Core service interfaces (optional, cache-free)
+
+## License
+
+MIT License - This package contains no Swiss Ephemeris code or dependencies.
+
+## Related Packages
+
+- `crius-swiss` - Swiss Ephemeris adapter implementation (AGPL/LGPL licensed)
+
