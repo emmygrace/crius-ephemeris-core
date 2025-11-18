@@ -11,6 +11,7 @@ from .types import (
     HousePositions,
     LayerPositions,
     LayerContext,
+    VedicOptions,
 )
 
 from .protocols import EphemerisAdapter
@@ -23,6 +24,7 @@ __all__ = [
     "LayerPositions",
     "LayerContext",
     "EphemerisAdapter",
+    "VedicOptions",
 ]
 
 __version__ = "0.1.0"

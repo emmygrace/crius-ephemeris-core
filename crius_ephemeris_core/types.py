@@ -5,7 +5,23 @@ These types are pure Python TypedDict definitions with no external dependencies.
 """
 
 from datetime import datetime
-from typing import TypedDict, Literal, Optional
+from typing import TypedDict, Literal, Optional, List, NotRequired
+
+
+class VedicOptions(TypedDict, total=False):
+    """
+    Optional configuration flags for Vedic/Jyotish calculations.
+
+    These allow downstream services to request additional derived data
+    such as divisional charts (vargas) or dasha timelines.
+    """
+
+    include_nakshatras: bool
+    enabled_vargas: List[str]
+    include_dashas: bool
+    dasha_systems: List[str]
+    dashas_depth: Literal["mahadasha", "antardasha", "pratyantardasha"]
+    include_yogas: bool
 
 
 class EphemerisSettings(TypedDict):
@@ -15,6 +31,7 @@ class EphemerisSettings(TypedDict):
     ayanamsa: Optional[str]
     house_system: str
     include_objects: list[str]
+    vedic_options: NotRequired[VedicOptions]
 
 
 class GeoLocation(TypedDict):
