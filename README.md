@@ -78,6 +78,21 @@ class MyEphemerisAdapter:
 - `crius_ephemeris_core/protocols.py` - Adapter protocol definitions
 - `crius_ephemeris_core/service.py` - Core service interfaces (optional, cache-free)
 
+## Documentation
+
+Full API documentation is available in the `docs/` directory. To build the documentation:
+
+```bash
+# Install documentation dependencies
+pip install sphinx sphinx-rtd-theme
+
+# Build documentation
+cd docs
+make html
+```
+
+The documentation will be generated in `docs/_build/html/`.
+
 ## License
 
 MIT License - This package contains no Swiss Ephemeris code or dependencies.

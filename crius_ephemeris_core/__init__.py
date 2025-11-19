@@ -16,6 +16,19 @@ from .types import (
 
 from .protocols import EphemerisAdapter
 
+# Optional service imports (can be imported separately)
+try:
+    from .service import (
+        EphemerisService,
+        BaseEphemerisService,
+        CachedEphemerisService,
+        CacheProvider,
+        create_ephemeris_service,
+    )
+    _SERVICE_AVAILABLE = True
+except ImportError:
+    _SERVICE_AVAILABLE = False
+
 __all__ = [
     "EphemerisSettings",
     "GeoLocation",
@@ -26,6 +39,16 @@ __all__ = [
     "EphemerisAdapter",
     "VedicOptions",
 ]
+
+# Add service exports if available
+if _SERVICE_AVAILABLE:
+    __all__.extend([
+        "EphemerisService",
+        "BaseEphemerisService",
+        "CachedEphemerisService",
+        "CacheProvider",
+        "create_ephemeris_service",
+    ])
 
 __version__ = "0.1.0"
 
